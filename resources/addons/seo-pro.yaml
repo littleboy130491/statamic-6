@@ -1,0 +1,4 @@
+site_defaults:
+  default: {  }
+site_defaults_sites:
+  default: null
