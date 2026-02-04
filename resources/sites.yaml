@@ -2,3 +2,8 @@ default:
   name: '{{ config:app:name }}'
   url: /
   locale: '{{ config:app:locale }}'
+indonesian:
+  name: Indonesian
+  url: /id
+  locale: id-ID
+  lang: id
