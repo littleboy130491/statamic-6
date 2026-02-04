@@ -4,12 +4,39 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{{ title ?? site:name }}</title>
+
+        {{# SEO Pro meta tags (title, description, OG, Twitter, JSON-LD, etc.) #}}
+        {{ seo_pro:meta }}
+
+        {{# Main CSS/JS assets #}}
         {{ vite src="resources/js/site.js|resources/css/site.css" }}
+
+        {{# Hook: Additional styles - use {{ section:styles }}...{{ /section:styles }} #}}
+        {{ yield:styles }}
+
+        {{# Hook: Additional head content - use {{ section:head }}...{{ /section:head }} #}}
+        {{ yield:head }}
     </head>
-    <body class="bg-zinc-100 dark:bg-zinc-900 font-sans leading-normal text-zinc-800 dark:text-zinc-400">
-        <div class="mx-auto px-2 lg:min-h-screen flex flex-col items-center justify-center">
+    <body class="{{ partial:contextual-body-classes }} {{ yield:body_class }} {{ yield:body_style_class }}{{ unless yield:body_style_class }}bg-zinc-100 dark:bg-zinc-900 font-sans leading-normal text-zinc-800 dark:text-zinc-400{{ /unless }}"{{ yield:body_attrs }}>
+        {{# Hook: Body start - analytics, tag managers, etc. #}}
+        {{ yield:body_start }}
+
+        {{# Main content wrapper #}}
+        <div class="{{ yield:wrapper_class }}{{ unless yield:wrapper_class }}mx-auto px-2 lg:min-h-screen flex flex-col items-center justify-center{{ /unless }}">
+            {{# Hook: Before content - header, navigation, etc. #}}
+            {{ yield:before_content }}
+
+            {{# Main template content #}}
             {{ template_content }}
+
+            {{# Hook: After content - footer, etc. #}}
+            {{ yield:after_content }}
         </div>
+
+        {{# Hook: Additional scripts - use {{ section:scripts }}...{{ /section:scripts }} #}}
+        {{ yield:scripts }}
+
+        {{# Hook: Body end #}}
+        {{ yield:body_end }}
     </body>
 </html>
