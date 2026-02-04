@@ -98,6 +98,7 @@ content/collections/pages/about.md
 | Navigation | [`statamic-conventions/navigations.md`](statamic-conventions/navigations.md) | Menus, nav trees, breadcrumbs, active states |
 | Forms | [`statamic-conventions/forms.md`](statamic-conventions/forms.md) | Contact forms, submissions, email notifications |
 | HTML to Antlers | [`statamic-conventions/html_to_antlers_instruction.md`](statamic-conventions/html_to_antlers_instruction.md) | Converting static HTML to dynamic Antlers templates |
+| Static Pages CMS Structure | [`statamic-conventions/static_pages_cms_fields_structure.md`](statamic-conventions/static_pages_cms_fields_structure.md) | Page-specific blueprints vs flexible page builder approaches |
 
 ---
 
@@ -114,7 +115,10 @@ START: Any Statamic Task
 └─ STEP 1: What are you building?
 
    ├─ A page (single, standalone content)
-   │  └─ Check: static_pages.md → blueprints_fields.md
+   │  └─ Check: static_pages.md → static_pages_cms_fields_structure.md → blueprints_fields.md
+   │
+   ├─ Converting HTML to Antlers
+   │  └─ Check: html_to_antlers_instruction.md → static_pages_cms_fields_structure.md → blueprints_fields.md
    │
    ├─ Multiple similar items (posts, products, team)
    │  └─ Check: collections.md → blueprints_fields.md
@@ -151,6 +155,41 @@ START: Any Statamic Task
 - Working with the pages collection
 
 **Trigger phrases:** "create a page", "page template", "homepage", "about page", "page hierarchy", "parent page", "child page"
+
+**Often combined with:**
+- `static_pages_cms_fields_structure.md` — for choosing blueprint approach
+- `html_to_antlers_instruction.md` — for converting HTML to templates
+- `blueprints_fields.md` — for page field configuration
+
+### Static Pages CMS Structure
+
+**Consult when:**
+- Deciding between page-specific blueprints vs flexible page builder
+- Creating unique page layouts (About, Contact, Services)
+- Setting up Replicator-based page builders
+- Planning CMS field architecture for static pages
+
+**Trigger phrases:** "page blueprint", "page builder", "flexible layout", "page-specific fields", "replicator sections", "unique page layout"
+
+**Often combined with:**
+- `static_pages.md` — for page structure
+- `blueprints_fields.md` — for field configuration details
+- `html_to_antlers_instruction.md` — for template conversion
+
+### HTML to Antlers
+
+**Consult when:**
+- Converting static HTML templates to dynamic Antlers
+- Extracting content from HTML files into CMS entries
+- Wrapping HTML with Statamic variables
+- Creating Antlers templates from design files
+
+**Trigger phrases:** "convert HTML", "HTML to Antlers", "template conversion", "static to dynamic", "extract content", "make template dynamic"
+
+**Often combined with:**
+- `static_pages.md` — for page template structure
+- `static_pages_cms_fields_structure.md` — for field planning
+- `blueprints_fields.md` — for field types and configuration
 
 ### Collections
 
@@ -241,6 +280,16 @@ START: Any Statamic Task
 4. `globals.md` — Company contact details
 5. `blueprints_fields.md` — Form field configuration
 
+### Converting HTML Design to Statamic
+
+1. **Detect multisite** — Check `resources/sites.yaml`
+2. `html_to_antlers_instruction.md` — Conversion workflow
+3. `static_pages_cms_fields_structure.md` — Choose blueprint approach
+4. `blueprints_fields.md` — Define fields
+5. `static_pages.md` — Create pages and templates
+6. Update entry `.md` files with extracted content
+7. Create `.antlers.html` templates with wrapped variables
+
 ---
 
 ## Important Conventions
@@ -275,14 +324,15 @@ Before writing any Statamic code or configuration:
 |---------------|------------------|
 | `.yaml` in `content/collections/` | collections.md, file_structure.md |
 | `.md` entry file | collections.md, static_pages.md |
-| `.yaml` in `resources/blueprints/` | blueprints_fields.md |
+| `.yaml` in `resources/blueprints/` | blueprints_fields.md, static_pages_cms_fields_structure.md |
 | `.yaml` in `content/taxonomies/` | taxonomies.md |
 | `.yaml` in `content/globals/` | globals.md |
 | `.yaml` in `content/navigation/` | navigations.md |
 | `.yaml` in `content/trees/` | navigations.md, static_pages.md |
 | `.yaml` in `resources/forms/` | forms.md |
-| `.antlers.html` template | Relevant content doc + file_structure.md |
+| `.antlers.html` template | html_to_antlers_instruction.md, relevant content doc + file_structure.md |
 | Email template | forms.md |
+| Converting HTML files | html_to_antlers_instruction.md, static_pages_cms_fields_structure.md |
 
 ---
 
