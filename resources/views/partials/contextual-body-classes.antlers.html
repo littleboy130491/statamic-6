@@ -3,24 +3,15 @@
     Generates WordPress-style contextual classes based on page type
     Similar to WordPress body_class() function
 #}}
-{{~
+{{#
     Homepage detection
-~}}
-{{ if is_homepage }}homepage {{ /if }}
-{{~
+#}}
+{{- if is_homepage -}}homepage {{- /if -}}{{#
     Entry context
-~}}
-{{ if is_entry }}entry entry-{{ collection }} entry-id-{{ id }} slug-{{ slug }} {{ /if }}
-{{~
+#}}{{- if is_entry -}}entry entry-{{ collection }} entry-id-{{ id }} slug-{{ slug }} {{- /if -}}{{#
     Taxonomy term context
-~}}
-{{ if is_term }}term taxonomy-{{ taxonomy }} term-{{ slug }} {{ /if }}
-{{~
+#}}{{- if is_term -}}term taxonomy-{{ taxonomy }} term-{{ slug }} {{- /if -}}{{#
     Template and layout
-~}}
-{{ if current_template }}template-{{ current_template }} {{ /if }}
-{{ if current_layout }}layout-{{ current_layout }} {{ /if }}
-{{~
+#}}{{- if current_template -}}template-{{ current_template }} {{- /if -}}{{- if current_layout -}}layout-{{ current_layout }} {{- /if -}}{{#
     Site locale
-~}}
-locale-{{ site:short_locale }}
+#}}locale-{{ site:short_locale }}
