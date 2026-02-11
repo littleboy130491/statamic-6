@@ -1,3 +1,38 @@
+{{?
+    $body_classes = '';
+    
+    if ($is_homepage ?? false) {
+        $body_classes .= 'homepage ';
+    }
+    
+    if ($is_entry ?? false) {
+        $body_classes .= 'entry';
+        if (isset($collection)) $body_classes .= " entry-{$collection}";
+        if (isset($id)) $body_classes .= " entry-id-{$id}";
+        if (isset($slug)) $body_classes .= " slug-{$slug}";
+        $body_classes .= ' ';
+    }
+    
+    if ($is_taxonomy ?? false) {
+        $body_classes .= 'term';
+        if (isset($taxonomy)) $body_classes .= " taxonomy-{$taxonomy}";
+        if (isset($slug)) $body_classes .= " term-{$slug}";
+        $body_classes .= ' ';
+    }
+    
+    if (isset($current_template)) {
+        $body_classes .= "template-{$current_template} ";
+    }
+    
+    if (isset($current_layout)) {
+        $body_classes .= "layout-{$current_layout} ";
+    }
+    
+    $locale = $site->short_locale ?? 'en';
+    $body_classes .= "locale-{$locale}";
+    
+    $body_classes = trim($body_classes);
+?}}
 <!doctype html>
 <html lang="{{ site:short_locale }}">
     <head>
@@ -17,7 +52,7 @@
         {{# Hook: Additional head content - use {{ section:head }}...{{ /section:head }} #}}
         {{ yield:head }}
     </head>
-    <body class="{{ partial:contextual-body-classes }}{{ if yield:body_class }} {{ yield:body_class }}{{ /if }}{{ if yield:body_style_class }} {{ yield:body_style_class }}{{ else }} bg-zinc-100 dark:bg-zinc-900 font-sans leading-normal text-zinc-800 dark:text-zinc-400{{ /if }}"{{ yield:body_attrs }}>
+    <body class="{{ $body_classes }}{{ if yield:body_class }} {{ yield:body_class }}{{ /if }}{{ if yield:body_style_class }} {{ yield:body_style_class }}{{ else }} bg-zinc-100 dark:bg-zinc-900 font-sans leading-normal text-zinc-800 dark:text-zinc-400{{ /if }}"{{ yield:body_attrs }}>
         {{# Hook: Body start - analytics, tag managers, etc. #}}
         {{ yield:body_start }}
 
