@@ -1,0 +1,44 @@
+{{#
+    Navigation Children Partial (Recursive)
+    
+    This partial is used internally by navigation.antlers.html
+    to render nested navigation items recursively.
+    
+    Parameters:
+    - children: The children items from the parent navigation
+    - ul_class: CSS classes for the <ul> element
+    - li_class: CSS classes for the <li> element
+    - a_class: CSS classes for the <a> element
+    - depth: Maximum depth to render
+    - current_depth: Current depth level
+#}}
+
+{{ if children && current_depth < depth }}
+    <ul class="{{ ul_class ?? '' }} navigation-depth-{{ current_depth }}">
+        {{ children }}
+            <li class="{{ li_class ?? '' }}">
+                <a 
+                    href="{{ url }}"
+                    class="{{ a_class ?? '' }} {{ data:classes ?? '' }}"
+                    {{ if data:new_tab }}target="_blank"{{ /if }}
+                    {{ if data:rel }}rel="{{ data:rel }}"{{ /if }}
+                    {{ if is_current }}aria-current="page"{{ /if }}
+                    {{ if is_parent }}aria-expanded="true"{{ /if }}
+                >
+                    {{ title }}
+                </a>
+
+                {{ if children }}
+                    {{ partial:navigation_children 
+                        :children="children" 
+                        :ul_class="ul_class"
+                        :li_class="li_class"
+                        :a_class="a_class"
+                        :depth="depth"
+                        current_depth="{{ current_depth + 1 }}"
+                    }}
+                {{ /if }}
+            </li>
+        {{ /children }}
+    </ul>
+{{ /if }}

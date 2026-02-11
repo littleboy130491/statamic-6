@@ -1,0 +1,27 @@
+title: 'Navigation Item'
+fields:
+  -
+    handle: classes
+    field:
+      type: text
+      display: Classes
+      instructions: 'CSS classes to apply to the navigation link.'
+      width: 50
+      localizable: true
+  -
+    handle: rel
+    field:
+      type: text
+      display: Rel Attribute
+      instructions: 'The rel attribute for the link (e.g., noopener, noreferrer, nofollow).'
+      width: 50
+      localizable: true
+  -
+    handle: new_tab
+    field:
+      type: toggle
+      display: 'Open in New Tab'
+      instructions: 'Enable to open this link in a new browser tab.'
+      default: false
+      width: 50
+      localizable: false

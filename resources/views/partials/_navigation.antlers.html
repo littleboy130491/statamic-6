@@ -1,0 +1,50 @@
+{{#
+    Navigation Partial
+    
+    Usage:
+    {{ partial:navigation handle="main" }}
+    
+    Optional parameters:
+    - handle: The navigation handle (default: 'main')
+    - ul_class: CSS classes for the <ul> element
+    - li_class: CSS classes for the <li> element
+    - a_class: CSS classes for the <a> element
+    - depth: Maximum depth to render (default: unlimited)
+    - show_children: Whether to show nested children (default: true)
+#}}
+
+{{ nav :handle="(handle ?? 'main')" }}
+    {{ if first }}
+        <ul class="{{ ul_class ?? 'flex gap-4' }}">
+    {{ /if }}
+
+    <li class="{{ li_class ?? '' }}">
+        <a 
+            href="{{ url }}"
+            class="{{ a_class ?? '' }} {{ data:classes ?? '' }}"
+            {{ if data:new_tab }}target="_blank"{{ /if }}
+            {{ if data:rel }}rel="{{ data:rel }}"{{ /if }}
+            {{ if is_current }}aria-current="page"{{ /if }}
+            {{ if is_parent }}aria-expanded="true"{{ /if }}
+        >
+            {{ title }}
+        </a>
+
+        {{ if show_children ?? true }}
+            {{ if children }}
+                {{ partial:navigation_children 
+                    :children="children" 
+                    :ul_class="ul_class"
+                    :li_class="li_class"
+                    :a_class="a_class"
+                    :depth="(depth ?? 3)"
+                    current_depth="1"
+                }}
+            {{ /if }}
+        {{ /if }}
+    </li>
+
+    {{ if last }}
+        </ul>
+    {{ /if }}
+{{ /nav }}
