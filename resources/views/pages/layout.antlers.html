@@ -1,0 +1,10 @@
+{{# Extend the base layout #}}
+{{ partial:layout }}
+
+{{# Header navigation - injected into the before_content hook #}}
+{{ section:before_content }}
+    {{ partial:partials/navigation handle="header" }}
+  
+{{ /section:before_content }}
+
+{{# Main template content will be automatically captured into template_content #}}

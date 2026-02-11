@@ -1,0 +1,24 @@
+tree:
+  -
+    id: e5e51c85-9bf4-4ed6-81f5-75be20bb7c8c
+    title: Test
+    url: 'https://smco.co.id/'
+    data:
+      classes: this-is-class
+      rel: noopener
+      new_tab: true
+    children:
+      -
+        id: 318609aa-214c-4bd6-a9ba-a79225e96312
+        title: About
+        url: 'https://imajiner.id/'
+        data:
+          classes: class-child
+          rel: nofollow
+  -
+    id: 23043522-b5a7-45ce-837e-ed6d46d781c4
+    title: This
+    url: 'https://statamic-6.test/'
+  -
+    id: 08898887-ae0d-4c7a-b168-35a612aedf34
+    entry: home

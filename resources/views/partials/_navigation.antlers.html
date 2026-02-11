@@ -13,34 +13,26 @@
     - show_children: Whether to show nested children (default: true)
 #}}
 
-{{ nav :handle="(handle ?? 'main')" }}
+{{ nav :handle="handle ?? 'main'" }}
     {{ if first }}
-        <ul class="{{ ul_class ?? 'flex gap-4' }}">
+        {{ if depth == 1 }}
+            <ul class="nav-{{ handle }} {{ ul_class ?? 'flex gap-4' }}">
+        {{ else }}
+            <ul class="nav-child depth-{{ depth }}">
+        {{ /if }}
     {{ /if }}
 
-    <li class="{{ li_class ?? '' }}">
+    <li class="nav-item {{ li_class ?? '' }}{{ if children }} has-children{{ /if }}{{ if is_current }} is-active{{ /if }}">
         <a 
             href="{{ url }}"
-            class="{{ a_class ?? '' }} {{ data:classes ?? '' }}"
-            {{ if data:new_tab }}target="_blank"{{ /if }}
-            {{ if data:rel }}rel="{{ data:rel }}"{{ /if }}
-            {{ if is_current }}aria-current="page"{{ /if }}
-            {{ if is_parent }}aria-expanded="true"{{ /if }}
+            class="{{ a_class ?? '' }} {{ classes ?? '' }}{{ if is_current }} active{{ /if }}"
+            {{ if is_external }}target="_blank" rel="noopener noreferrer"{{ /if }}
         >
             {{ title }}
         </a>
 
-        {{ if show_children ?? true }}
-            {{ if children }}
-                {{ partial:navigation_children 
-                    :children="children" 
-                    :ul_class="ul_class"
-                    :li_class="li_class"
-                    :a_class="a_class"
-                    :depth="(depth ?? 3)"
-                    current_depth="1"
-                }}
-            {{ /if }}
+        {{ if children }}
+            {{ *recursive children* }}
         {{ /if }}
     </li>
 
